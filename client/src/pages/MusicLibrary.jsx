@@ -23,7 +23,7 @@ const MusicLibrary = () => {
       setError(null);
       try {
         const response = await fetch(
-          `http://localhost:5001/api/music?term=${encodeURIComponent(searchTerm)}`,
+          `https://streamsphere-backend.onrender.com/api/music?term=${encodeURIComponent(searchTerm)}`,
           { signal }
         );
         if (!response.ok) {
