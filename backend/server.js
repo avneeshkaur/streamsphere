@@ -14,7 +14,14 @@ const port = process.env.PORT || 5001;
 app.use(helmet());
 
 // Restrict CORS to frontend origin
-const allowedOrigins = [process.env.FRONTEND_ORIGIN, 'http://localhost:5175', 'http://localhost:5174', 'http://localhost:5173', 'http://localhost:3000'];
+const allowedOrigins = [
+  process.env.FRONTEND_ORIGIN,
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'http://localhost:5175',
+  'https://streamsphere-frontend.onrender.com'  // ✅ IMPORTANT
+];
 app.use(cors({
   origin: function(origin, callback){
     // allow requests with no origin (like mobile apps or curl requests)
