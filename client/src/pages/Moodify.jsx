@@ -31,7 +31,7 @@ const Moodify = () => {
     if (mood) {
       const searchTerm = moodSearchTerms[mood] || mood;
       axios
-        .get(`http://localhost:5001/api/music?term=${encodeURIComponent(searchTerm)}`)
+        .get(`${import.meta.env.VITE_BACKEND_URL}/api/music?term=${encodeURIComponent(searchTerm)}`)
         .then((response) => {
           setMusicList(response.data);
         })
