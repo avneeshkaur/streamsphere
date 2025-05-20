@@ -35,7 +35,7 @@ const SONGS_PER_PAGE = 7;
 const SONGS_FETCH_LIMIT = 200;
 
 // Load the service account key from your JSON file
-const keyPath = path.join(__dirname, process.env.GOOGLE_APPLICATION_CREDENTIALS);
+const keyPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
 
 // Dialogflow configuration
