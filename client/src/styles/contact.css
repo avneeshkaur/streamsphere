@@ -1,0 +1,124 @@
+.ask-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #000000, #1e1e1e);
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.ask-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
+  color: #fff;
+  transition: all 0.4s ease;
+}
+
+.ask-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #fff;
+}
+
+.ask-icon {
+  color: #00f0ff;
+  margin-left: 8px;
+}
+
+.ask-group {
+  margin-bottom: 1.3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.ask-group label {
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #ccc;
+}
+
+.ask-group input,
+.ask-group textarea {
+  padding: 0.8rem 1rem;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s;
+}
+
+.ask-group input:focus,
+.ask-group textarea:focus {
+  border-color: #00f0ff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.ask-group input::placeholder,
+.ask-group textarea::placeholder {
+  color: #aaa;
+}
+
+.ask-feedback {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #00ff88;
+  font-weight: 500;
+}
+
+.ask-card button {
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background: #00f0ff;
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.ask-card button:hover:not(:disabled) {
+  background: #00cfe6;
+}
+
+.ask-card button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 768px) {
+  .ask-container {
+    padding: 1rem;
+  }
+
+  .ask-card {
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+
+  .ask-title {
+    font-size: 1.5rem;
+  }
+
+  .ask-group input,
+  .ask-group textarea {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .ask-card button {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+}

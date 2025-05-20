@@ -1,0 +1,21 @@
+/* src/index.css */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(135deg, #ffffff, #00ffcc, #00bcd4);
+  background-size: 300% 300%;
+  animation: bgFlow 15s ease infinite;
+  font-family: 'Poppins', sans-serif;
+}
+
+@keyframes bgFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+#root {
+   min-height: 100%;
+}

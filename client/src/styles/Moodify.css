@@ -1,0 +1,152 @@
+.moodify-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.5s ease, animation 0.5s ease;
+}
+
+/* Mood-specific background and animation */
+.moodify-container.happy {
+  background: linear-gradient(to right, #f6d365, #fda085);
+  animation: happyBounce 2s infinite;
+}
+
+.moodify-container.sad {
+  background: linear-gradient(to right, #bdc3c7,pink);
+  animation: sadFade 4s ease-in-out infinite;
+}
+
+.moodify-container.angry {
+  background: linear-gradient(to right, #e52d27, #b31217);
+  animation: angryShake 0.6s ease-in-out infinite;
+}
+
+.moodify-container.calm {
+  background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+  animation: calmFloat 3s ease-in-out infinite;
+}
+
+.moodify-container.romantic {
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  animation: romanticGlow 2s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes happyBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes sadFade {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+@keyframes angryShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@keyframes calmFloat {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(3px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes romanticGlow {
+  0% { box-shadow: 0 0 10px #ff99cc; }
+  50% { box-shadow: 0 0 20px #ff66b2; }
+  100% { box-shadow: 0 0 10px #ff99cc; }
+}
+
+/* Shared Glass Effect */
+.moodify-left, .moodify-right {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+  flex: 1;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8.5px);
+  -webkit-backdrop-filter: blur(8.5px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Titles and Text */
+.moodify-left h1, .moodify-right h1 {
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+.moodify-left p, .moodify-right p {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+/* Mood Buttons */
+.mood-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.mood-buttons button {
+  background: linear-gradient(90deg, #1CB5E0 0%, #000851 100%);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.mood-buttons button:hover {
+  background: linear-gradient(90deg, #000851 0%, #1CB5E0 100%);
+  transform: scale(1.05);
+}
+
+/* Music List */
+.music-list-container {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.music-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.music-list li {
+  margin-bottom: 15px;
+}
+
+.music-list li p {
+  margin: 0 0 5px 0;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Textarea */
+.moodify-right textarea {
+  flex-grow: 1;
+  resize: none;
+  border-radius: 10px;
+  border: none;
+  padding: 15px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.moodify-right textarea::placeholder {
+  color: #ccc;
+}

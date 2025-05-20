@@ -1,0 +1,128 @@
+.vibetube-container {
+  height: 100vh;
+  background-color: black;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  overflow: hidden;
+  filter: none;
+}
+
+.video-controls {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.video-controls input[type="file"],
+.video-controls button {
+  background-color: #111;
+  color: white;
+  border: 1px solid #444;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.video-controls button:hover {
+  background-color: #222;
+}
+
+.error-text {
+  color: #ff6b6b;
+  font-weight: bold;
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  z-index: 10;
+}
+
+.cinema-video {
+  width: 100vw;
+  height: 100vh;
+  object-fit: contain;
+  z-index: 1;
+  transition: box-shadow 0.2s ease, filter 0.2s ease;
+  border-radius: 8px;
+  background-color: black;
+  /* Removed filter property to avoid compounding with body filter */
+  /* filter: brightness(1.2) contrast(1.25); */
+}
+
+.cinema-video.glow {
+  box-shadow: 0 0 35px 15px rgba(255, 0, 100, 0.4);
+}
+
+.audio-visualizer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  background-color: transparent;
+  pointer-events: none;
+  z-index: 2;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.35);
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 768px) {
+  .vibetube-container {
+    height: auto;
+    padding: 10px;
+  }
+
+  .video-controls {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .video-controls input[type="file"],
+  .video-controls button {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .cinema-video {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+
+  .error-text {
+    position: static;
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .audio-visualizer {
+    height: 80px;
+  }
+}
