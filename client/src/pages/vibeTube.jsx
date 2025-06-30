@@ -1,3 +1,5 @@
+// StreamSphere\client\src\pages\vibeTube.jsx
+
 import React, { useEffect, useRef, useState } from 'react';
 import '../styles/vibeTube.css';
 

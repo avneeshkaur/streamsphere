@@ -1,3 +1,5 @@
+// \StreamSphere\client\src\App.jsx
+
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import DashboardHome from "./pages/dashboardhome";

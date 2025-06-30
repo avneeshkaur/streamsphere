@@ -1,4 +1,4 @@
-/* src/styles/dashboardhome.css */
+/* StreamSphere\client\src\styles\dashboardhome.css */
 
 body, html {
   margin: 0;
@@ -6,17 +6,24 @@ body, html {
   font-family: 'Segoe UI', sans-serif;
   background-color: #000;
   color: white;
+  height: auto;
+  min-height: 100vh;
   overflow-x: hidden;
 }
 
+.dashboard-wrapper {
+  min-height: 100dvh;
+  height: 100dvh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
 .dashboard {
-  min-height: 100vh;
-  width: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  background-color: #000;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 .navbar {
@@ -24,7 +31,7 @@ body, html {
   justify-content: space-between;
   align-items: center;
   background: rgba(0, 0, 0, 0.7);
-  padding: 20px 40px;
+  padding: 12px 30px; /* Reduced top-bottom padding */
   backdrop-filter: blur(10px);
   position: fixed;
   width: 100%;
@@ -33,7 +40,7 @@ body, html {
 }
 
 .logo {
-  font-size: 24px;
+  font-size: 26px;
   color: #00ffc8;
   font-weight: bold;
   display: flex;
@@ -53,8 +60,10 @@ body, html {
 .logout-btn {
   color: white;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 18px; /* Increased font size */
+  font-weight: 500;
   transition: color 0.3s ease;
+
 }
 
 .nav-links li a:hover,
@@ -63,6 +72,17 @@ body, html {
 .logout-btn:focus-visible {
   color: #00ffc8;
   outline: none;
+}
+
+.nav-link-logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 .logout-btn {
@@ -85,8 +105,9 @@ body, html {
 }
 
 .dashboard-container {
+  flex: 1;
   text-align: center;
-  padding: 140px 20px 60px;
+  padding: 160px 20px 80px; /* Increased top and bottom padding */
 }
 
 .dashboard-container h1 {
@@ -98,26 +119,33 @@ body, html {
 }
 
 .dashboard-container p {
-  font-size: 18px;
-  color: #ccc;
+  font-size: clamp(1rem, 1.5vw, 22px);
+  color: #ffffff;
   margin-bottom: 40px;
-  text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+  padding: 8px 20px;
+  display: inline-block;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 255, 200, 0.4);
+  backdrop-filter: blur(6px);
+  text-shadow: 1px 1px 5px rgba(0, 255, 200, 0.7);
 }
+
 
 .features {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 30px;
+  gap: 2rem;
+  padding: 0 4rem;
 }
 
 .feature-card {
   background: rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(0, 255, 200, 0.2);
-  border-radius: 16px;
-  padding: 30px;
-  width: 160px;
-  height: 160px;
+  border-radius: 1rem;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  width: clamp(150px, 18vw, 220px);
+  height: clamp(150px, 18vw, 220px);
   color: #fff;
   text-decoration: none;
   text-align: center;
@@ -131,14 +159,12 @@ body, html {
 }
 
 .feature-card span {
-  font-size: 32px;
-  margin-bottom: 10px;
+  font-size: clamp(1.5rem, 2.8vw, 2.5rem);
+  margin-bottom: 0.5rem;
 }
 
 .feature-card h3 {
-  font-size: 18px;
-  font-weight: 600;
-  color: #fff;
+  font-size: clamp(1rem, 2vw, 1.3rem);
 }
 
 .feature-card:hover,
@@ -147,8 +173,41 @@ body, html {
   box-shadow: 0 0 30px rgba(0, 255, 200, 0.8);
   outline: none;
 }
+@media (max-width: 900px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .logo {
+    justify-content: center;
+    width: 100%;
+    font-size: 24px;
+  }
+
+  .nav-links {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    padding-bottom: 10px;
+  }
+
+  .nav-links li a,
+  .logout-btn {
+    font-size: 16px;
+  }
+}
 
 @media (max-width: 768px) {
+  html, body {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
   .features {
     flex-direction: column;
     align-items: center;
@@ -162,7 +221,7 @@ body, html {
     margin-left: 0;
   }
   .dashboard-container {
-    padding: 100px 10px 40px;
+    padding: 140px 10px 40px !important; /* Increased top padding to fix welcome message visibility */
   }
   .dashboard-container h1 {
     font-size: 28px;
@@ -182,16 +241,45 @@ body, html {
   .feature-card h3 {
     font-size: 16px;
   }
+  .dashboard-wrapper {
+    min-height: 100dvh; /* ✅ Dynamically adjusts for mobile safe height */
+    height: 100dvh;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav-links {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    justify-content: flex-start;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE 10+ */
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
+
+  .nav-links li {
+    flex: 0 0 auto;
+    padding: 6px 10px;
+  }
+
+  .navbar {
+    align-items: flex-start;
+  }
 }
 
 /* Footer styles for copyright */
 .footer {
   text-align: center;
-  padding: 20px 0;
+  padding: 20px;
   background-color: rgba(0, 255, 200, 0.1);
   color: #00ffc8;
   font-size: 14px;
-  position: relative;
-  bottom: 0;
   width: 100%;
+  margin-top: auto;
 }

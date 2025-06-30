@@ -1,3 +1,5 @@
+// StreamSphere\client\src\pages\Moodify.jsx
+
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "../styles/Moodify.css";
@@ -58,7 +60,7 @@ const Moodify = () => {
     setMessage("");
 
     try {
-      const res = await fetch("https://streamsphere-backend.onrender.com/api/chatbot", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chatbot`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message }),

@@ -1,4 +1,5 @@
-// src/pages/ForgotPassword.js
+// StreamSphere\client\src\pages\ForgotPassword.jsx
+
 import React, { useState } from "react";
 import { auth } from "../firebase";
 import { sendPasswordResetEmail } from "firebase/auth";

@@ -1,4 +1,9 @@
+// \StreamSphere\client\src\pages\MoodAI.jsx
+
 /* copyright@streamsphere */
+import * as tf from '@tensorflow/tfjs';          // version 1.7.4
+
+tf.setBackend('webgl');
 import React, { useEffect, useRef, useState } from 'react';
 import * as faceapi from 'face-api.js';
 import birdImage from '../assets/bird.png';
@@ -25,6 +30,9 @@ const MoodAI = () => {
   useEffect(() => {
     const loadModels = async () => {
       try {
+        await tf.setBackend('webgl');   // 👈 Ensure backend is set
+        await tf.ready();  
+
         await faceapi.nets.tinyFaceDetector.loadFromUri('/models/tiny_face_detector_model');
         await faceapi.nets.faceExpressionNet.loadFromUri('/models/face_expression');
         setLoading(false);

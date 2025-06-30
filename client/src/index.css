@@ -1,4 +1,6 @@
-/* src/index.css */
+/* StreamSphere\client\src\index.css */
+@import "tailwindcss";
+
 html, body {
   margin: 0;
   padding: 0;

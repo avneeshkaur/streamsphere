@@ -1,3 +1,5 @@
+// \client\src\pages\Login.jsx
+
 import React, { useEffect, useState } from "react";
 import "../styles/Login.css";
 import { auth, provider } from "../firebase";

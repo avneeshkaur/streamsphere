@@ -1,3 +1,5 @@
+// StreamSphere\client\src\pages\MusicLibrary.jsx
+
 import React, { useState, useEffect } from "react";
 import MusicCard from "../components/MusicCard";
 
@@ -23,7 +25,7 @@ const MusicLibrary = () => {
       setError(null);
       try {
         const response = await fetch(
-          `https://streamsphere-backend.onrender.com/api/music?term=${encodeURIComponent(searchTerm)}`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/music?term=${encodeURIComponent(searchTerm)}`,
           { signal }
         );
         if (!response.ok) {

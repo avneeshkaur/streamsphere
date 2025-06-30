@@ -1,4 +1,5 @@
-// src/pages/DashboardHome.js
+// StreamSphere\client\src\pages\dashboardhome.jsx
+
 import React, { useEffect, useState } from "react";
 import "../styles/dashboardhome.css";
 import { Smile, Music, User, Settings, LogOut } from "lucide-react";
@@ -31,17 +32,16 @@ const DashboardHome = () => {
     { icon: <User size={28} />, label: "MoodAI", link: "/moodai" },
   ];
 
-/* copyright@streamsphere */
   return (
-    <div
-      className="dashboard"
+    <div className="dashboard-wrapper"
       style={{
         backgroundImage: `url("/assets/bgc.jpeg")`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-      }}
-    >
+        
+      }}>
+    <div className="dashboard">
       <header className="navbar">
         <motion.div className="logo" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
           🎧 StreamSphere
@@ -61,10 +61,11 @@ const DashboardHome = () => {
         </ul>
       </header>
 
-      <main className="dashboard-container">
+      <main className="dashboard-container" >
         <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2 }}>
           🎧 Welcome {user?.displayName || user?.email || "to"} <strong> StreamSphere</strong>
         </motion.h1>
+        <br></br>
         <p>Your AI-powered music space — personalized playlists, visuals, and mood therapy.</p>
 
         <div className="features">
@@ -76,9 +77,11 @@ const DashboardHome = () => {
           ))}
         </div>
       </main>
+
       <footer className="footer">
         <p>© {new Date().getFullYear()} StreamSphere. All rights reserved.</p>
       </footer>
+    </div>
     </div>
   );
 };

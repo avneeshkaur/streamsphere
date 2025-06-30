@@ -1,4 +1,5 @@
-// src/pages/Signup.js
+// \StreamSphere\client\src\pages\Signup.jsx
+
 import React, { useState } from "react";
 import { auth } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";

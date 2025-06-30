@@ -1,3 +1,5 @@
+// StreamSphere\client\src\components\MusicCard.jsx
+
 import React from "react";
 import MusicPlayer from "./MusicPlayer";
 
