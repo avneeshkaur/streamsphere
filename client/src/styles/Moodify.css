@@ -9,6 +9,8 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   min-height: 100vh;
   transition: background 0.4s ease;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 /* Mood-specific background and animation */
@@ -110,6 +112,7 @@
 
 .music-list li audio {
   width: min(100%, 420px);
+  max-width: 100%;
 }
 
 /* Textarea */
@@ -153,8 +156,8 @@
 }
 
 .mood-chat-history {
-  min-height: 220px;
-  height: 300px;
+  min-height: 200px;
+  height: clamp(220px, 36vh, 320px);
   overflow-y: auto;
   background: #111;
   padding: 10px;
@@ -204,7 +207,8 @@
   border: none;
   font-size: 1rem;
   resize: none;
-  height: 40px;
+  min-height: 44px;
+  height: 44px;
   box-sizing: border-box;
 }
 
@@ -261,11 +265,12 @@
   }
 
   .music-list-container {
-    max-height: 240px;
+    max-height: 320px;
   }
 
   .mood-chat-history {
-    height: 220px;
+    min-height: 160px;
+    height: 32vh;
   }
 
   .mood-chat-input-row {
@@ -274,7 +279,7 @@
 
   .mood-chat-input {
     width: 100%;
-    min-height: 80px;
+    min-height: 68px;
     height: auto;
   }
 
