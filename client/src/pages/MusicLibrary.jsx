@@ -4,7 +4,11 @@ import React, { useState, useEffect } from "react";
 import MusicCard from "../components/MusicCard";
 import "../styles/musiclibrary.css";
 
-const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "https://streamsphere-backend.onrender.com";
+const API_BASE_URLS = [
+  import.meta.env.VITE_BACKEND_URL,
+  "https://streamsphere-backend.onrender.com",
+  "http://localhost:5001",
+].filter(Boolean);
 
 const MusicLibrary = () => {
   const [musicList, setMusicList] = useState([]);
@@ -23,21 +27,30 @@ const MusicLibrary = () => {
     const controller = new AbortController();
     const signal = controller.signal;
 
+    const fetchMusicFromBackend = async (term, currentSignal) => {
+      const seen = new Set();
+      for (const base of API_BASE_URLS) {
+        if (seen.has(base)) continue;
+        seen.add(base);
+        try {
+          const response = await fetch(`${base}/api/music?term=${encodeURIComponent(term)}`, {
+            signal: currentSignal,
+          });
+          if (!response.ok) continue;
+          const data = await response.json();
+          if (Array.isArray(data)) return data;
+        } catch (err) {
+          if (err.name === "AbortError") throw err;
+        }
+      }
+      throw new Error("Backend unreachable");
+    };
+
     const fetchMusic = async () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(
-          `${API_BASE_URL}/api/music?term=${encodeURIComponent(searchTerm)}`,
-          { signal }
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        if (!Array.isArray(data)) {
-          throw new Error("Unexpected API response structure");
-        }
+        const data = await fetchMusicFromBackend(searchTerm, signal);
         const songs = data.map((track) => ({
           id: track.trackId,
           name: track.trackName,
@@ -50,7 +63,7 @@ const MusicLibrary = () => {
         if (err.name === "AbortError") {
           return;
         }
-        setError(err.message);
+        setError("API connect nahi ho raha. Backend deploy/cold-start check karo.");
       } finally {
         setLoading(false);
       }

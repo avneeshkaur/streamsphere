@@ -20,7 +20,11 @@ const moodImages = {
   Romantic: "/assets/romantic.jpg",
 };
 
-const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "https://streamsphere-backend.onrender.com";
+const API_BASE_URLS = [
+  import.meta.env.VITE_BACKEND_URL,
+  "https://streamsphere-backend.onrender.com",
+  "http://localhost:5001",
+].filter(Boolean);
 
 const Moodify = () => {
   const [mood, setMood] = useState("");
@@ -36,21 +40,36 @@ const Moodify = () => {
       const searchTerm = moodSearchTerms[mood] || mood;
       setLoadingMusic(true);
       setMusicError("");
-      axios
-        .get(`${API_BASE_URL}/api/music?term=${encodeURIComponent(searchTerm)}`, {
-          timeout: 20000,
-        })
-        .then((response) => {
-          setMusicList(response.data);
-        })
-        .catch((error) => {
+      (async () => {
+        try {
+          let data = null;
+          const seen = new Set();
+          for (const base of API_BASE_URLS) {
+            if (seen.has(base)) continue;
+            seen.add(base);
+            try {
+              const response = await axios.get(`${base}/api/music?term=${encodeURIComponent(searchTerm)}`, {
+                timeout: 20000,
+              });
+              if (Array.isArray(response.data)) {
+                data = response.data;
+                break;
+              }
+            } catch {
+              // Try next backend URL
+            }
+          }
+
+          if (!data) throw new Error("Backend unreachable");
+          setMusicList(data);
+        } catch (error) {
           console.error("Error fetching music data:", error);
           setMusicList([]);
           setMusicError("Songs load nahi ho paaye. Backend wake-up ya network issue ho sakta hai.");
-        })
-        .finally(() => {
+        } finally {
           setLoadingMusic(false);
-        });
+        }
+      })();
     }
   }, [mood]);
 
@@ -69,12 +88,28 @@ const Moodify = () => {
     setMessage("");
 
     try {
-      const res = await fetch(`${API_BASE_URL}/api/chatbot`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message }),
-      });
-      const data = await res.json();
+      let data = null;
+      const seen = new Set();
+      for (const base of API_BASE_URLS) {
+        if (seen.has(base)) continue;
+        seen.add(base);
+        try {
+          const res = await fetch(`${base}/api/chatbot`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message }),
+          });
+          if (!res.ok) continue;
+          data = await res.json();
+          break;
+        } catch {
+          // Try next backend URL
+        }
+      }
+
+      if (!data) {
+        throw new Error("Chatbot backend unreachable");
+      }
       const botMsg = { type: "bot", text: data.reply || "No response" };
       setChat((prev) => [...prev, botMsg]);
     } catch (err) {
