@@ -1,96 +1,93 @@
-/* StreamSphere\client\src\styles\contact.css */
-
 .ask-container {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #000000, #1e1e1e);
-  padding: 2rem;
-  font-family: 'Segoe UI', sans-serif;
+  padding: 28px 16px;
+  background:
+    radial-gradient(70% 60% at 10% 10%, rgba(45, 212, 191, 0.14), transparent 60%),
+    radial-gradient(60% 55% at 90% 0%, rgba(56, 189, 248, 0.14), transparent 60%),
+    #0b1220;
 }
 
 .ask-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border-radius: 20px;
-  padding: 2.5rem;
-  width: 100%;
-  max-width: 500px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
-  color: #fff;
-  transition: all 0.4s ease;
+  width: min(560px, 100%);
+  background: rgba(10, 18, 35, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 22px;
+  padding: 30px;
+  box-shadow: 0 16px 36px rgba(2, 6, 23, 0.42);
+  color: #e2e8f0;
 }
 
 .ask-title {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
+  margin: 0 0 16px;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
   text-align: center;
-  color: #fff;
 }
 
 .ask-icon {
-  color: #00f0ff;
+  color: #67e8f9;
   margin-left: 8px;
 }
 
 .ask-group {
-  margin-bottom: 1.3rem;
+  margin-bottom: 14px;
   display: flex;
   flex-direction: column;
 }
 
 .ask-group label {
-  margin-bottom: 5px;
-  font-weight: 500;
-  color: #ccc;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #b7c6e3;
 }
 
 .ask-group input,
 .ask-group textarea {
-  padding: 0.8rem 1rem;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.82rem 1rem;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.34);
   border-radius: 12px;
-  color: #fff;
-  font-size: 1rem;
+  color: #e2e8f0;
+  font-size: 0.96rem;
   outline: none;
-  transition: 0.3s;
 }
 
 .ask-group input:focus,
 .ask-group textarea:focus {
-  border-color: #00f0ff;
-  background: rgba(255, 255, 255, 0.1);
+  border-color: #22d3ee;
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.16);
 }
 
 .ask-group input::placeholder,
 .ask-group textarea::placeholder {
-  color: #aaa;
+  color: #7f93b6;
 }
 
 .ask-feedback {
   text-align: center;
-  margin-bottom: 1rem;
-  color: #00ff88;
-  font-weight: 500;
+  margin-bottom: 12px;
+  color: #5eead4;
+  font-weight: 600;
 }
 
 .ask-card button {
   width: 100%;
-  padding: 0.9rem;
-  font-size: 1.1rem;
-  font-weight: bold;
-  background: #00f0ff;
-  color: #000;
   border: none;
   border-radius: 12px;
+  height: 46px;
+  font-size: 1rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #2dd4bf 0%, #22d3ee 100%);
+  color: #071423;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 .ask-card button:hover:not(:disabled) {
-  background: #00cfe6;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(34, 211, 238, 0.32);
 }
 
 .ask-card button:disabled {
@@ -98,29 +95,9 @@
   cursor: not-allowed;
 }
 
-/* Responsive styles for mobile devices */
 @media (max-width: 768px) {
-  .ask-container {
-    padding: 1rem;
-  }
-
   .ask-card {
-    padding: 1.5rem;
-    border-radius: 12px;
-  }
-
-  .ask-title {
-    font-size: 1.5rem;
-  }
-
-  .ask-group input,
-  .ask-group textarea {
-    font-size: 0.9rem;
-    padding: 0.6rem 0.8rem;
-  }
-
-  .ask-card button {
-    font-size: 1rem;
-    padding: 0.8rem;
+    padding: 22px;
+    border-radius: 16px;
   }
 }

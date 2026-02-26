@@ -20,9 +20,13 @@ const moodImages = {
   Romantic: "/assets/romantic.jpg",
 };
 
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "https://streamsphere-backend.onrender.com";
+
 const Moodify = () => {
   const [mood, setMood] = useState("");
   const [musicList, setMusicList] = useState([]);
+  const [loadingMusic, setLoadingMusic] = useState(false);
+  const [musicError, setMusicError] = useState("");
   const currentAudio = useRef(null);
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
@@ -30,14 +34,22 @@ const Moodify = () => {
   useEffect(() => {
     if (mood) {
       const searchTerm = moodSearchTerms[mood] || mood;
+      setLoadingMusic(true);
+      setMusicError("");
       axios
-        .get(`${import.meta.env.VITE_BACKEND_URL}/api/music?term=${encodeURIComponent(searchTerm)}`)
+        .get(`${API_BASE_URL}/api/music?term=${encodeURIComponent(searchTerm)}`, {
+          timeout: 20000,
+        })
         .then((response) => {
           setMusicList(response.data);
         })
         .catch((error) => {
           console.error("Error fetching music data:", error);
           setMusicList([]);
+          setMusicError("Songs load nahi ho paaye. Backend wake-up ya network issue ho sakta hai.");
+        })
+        .finally(() => {
+          setLoadingMusic(false);
         });
     }
   }, [mood]);
@@ -57,7 +69,7 @@ const Moodify = () => {
     setMessage("");
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chatbot`, {
+      const res = await fetch(`${API_BASE_URL}/api/chatbot`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message }),
@@ -95,6 +107,9 @@ const Moodify = () => {
             <img src={moodImages[mood]} alt={mood} className="mood-preview-image" />
           </div>
         )}
+
+        {loadingMusic && <p className="mood-status">Loading songs...</p>}
+        {!loadingMusic && musicError && <p className="mood-status mood-error">{musicError}</p>}
 
         {mood && musicList.length > 0 && (
           <div className="music-list-container">

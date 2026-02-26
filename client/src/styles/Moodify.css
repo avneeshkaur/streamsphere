@@ -4,78 +4,50 @@
   display: flex;
   gap: 20px;
   padding: 20px;
+  align-items: flex-start;
   color: #fff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  transition: background 0.5s ease, animation 0.5s ease;
+  min-height: 100vh;
+  transition: background 0.4s ease;
 }
 
 /* Mood-specific background and animation */
 .moodify-container.happy {
-  background: linear-gradient(to right, #f6d365, #fda085);
-  animation: happyBounce 2s infinite;
+  background: linear-gradient(135deg, #f8b500 0%, #f12711 100%);
 }
 
 .moodify-container.sad {
-  background: linear-gradient(to right, #bdc3c7,pink);
-  animation: sadFade 4s ease-in-out infinite;
+  background: linear-gradient(135deg, #3a6073 0%, #16222a 100%);
 }
 
 .moodify-container.angry {
-  background: linear-gradient(to right, #e52d27, #b31217);
-  animation: angryShake 0.6s ease-in-out infinite;
+  background: linear-gradient(135deg, #cb2d3e 0%, #ef473a 100%);
 }
 
 .moodify-container.calm {
-  background: linear-gradient(to right, #a1c4fd, #c2e9fb);
-  animation: calmFloat 3s ease-in-out infinite;
+  background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
 }
 
 .moodify-container.romantic {
-  background: linear-gradient(to right, #ff9a9e, #fad0c4);
-  animation: romanticGlow 2s ease-in-out infinite;
-}
-
-/* Animations */
-@keyframes happyBounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes sadFade {
-  0% { opacity: 0.7; }
-  100% { opacity: 1; }
-}
-
-@keyframes angryShake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
-}
-
-@keyframes calmFloat {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(3px); }
-  100% { transform: translateY(0px); }
-}
-
-@keyframes romanticGlow {
-  0% { box-shadow: 0 0 10px #ff99cc; }
-  50% { box-shadow: 0 0 20px #ff66b2; }
-  100% { box-shadow: 0 0 10px #ff99cc; }
+  background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 100%);
 }
 
 /* Shared Glass Effect */
 .moodify-left, .moodify-right {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
+  background: rgba(12, 12, 18, 0.45);
+  border-radius: 18px;
   padding: 20px;
   flex: 1;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(8.5px);
-  -webkit-backdrop-filter: blur(8.5px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   display: flex;
   flex-direction: column;
+}
+
+.moodify-right {
+  min-width: 280px;
 }
 
 /* Titles and Text */
@@ -98,7 +70,7 @@
 }
 
 .mood-buttons button {
-  background: linear-gradient(90deg, #1CB5E0 0%, #000851 100%);
+  background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
   border: none;
   border-radius: 25px;
   color: white;
@@ -109,7 +81,7 @@
 }
 
 .mood-buttons button:hover {
-  background: linear-gradient(90deg, #000851 0%, #1CB5E0 100%);
+  background: linear-gradient(90deg, #0072ff 0%, #00c6ff 100%);
   transform: scale(1.05);
 }
 
@@ -136,6 +108,10 @@
   font-size: 1rem;
 }
 
+.music-list li audio {
+  width: min(100%, 420px);
+}
+
 /* Textarea */
 .moodify-right textarea {
   flex-grow: 1;
@@ -151,4 +127,158 @@
 
 .moodify-right textarea::placeholder {
   color: #ccc;
+}
+
+.mood-preview-image {
+  width: 100%;
+  max-width: 420px;
+  max-height: 340px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.mood-image {
+  margin-bottom: 14px;
+}
+
+.mood-chat-panel {
+  flex: 0 0 30%;
+  padding: 15px;
+}
+
+.mood-chat-title {
+  font-size: 1.2rem;
+  margin: 0 0 10px;
+}
+
+.mood-chat-history {
+  min-height: 220px;
+  height: 300px;
+  overflow-y: auto;
+  background: #111;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.mood-chat-row {
+  margin: 5px 0;
+}
+
+.mood-chat-row.user {
+  text-align: right;
+}
+
+.mood-chat-row.bot {
+  text-align: left;
+}
+
+.mood-chat-bubble {
+  padding: 8px 12px;
+  border-radius: 10px;
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.mood-chat-bubble.user {
+  background: #0051ff;
+}
+
+.mood-chat-bubble.bot {
+  background: #00ffcc;
+  color: #001;
+}
+
+.mood-chat-input-row {
+  display: flex;
+  gap: 10px;
+}
+
+.mood-chat-input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+  resize: none;
+  height: 40px;
+  box-sizing: border-box;
+}
+
+.mood-chat-send {
+  padding: 10px 15px;
+  background: #00ffcc;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.mood-status {
+  margin: 8px 0 14px;
+  font-size: 0.95rem;
+}
+
+.mood-error {
+  color: #ffd7d7;
+}
+
+@media (max-width: 1024px) {
+  .moodify-container {
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  .moodify-left,
+  .moodify-right,
+  .mood-chat-panel {
+    width: 100%;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .mood-chat-history {
+    height: 260px;
+  }
+}
+
+@media (max-width: 768px) {
+  .moodify-container {
+    gap: 14px;
+    padding: 12px;
+  }
+
+  .moodify-left,
+  .moodify-right {
+    padding: 14px;
+  }
+
+  .mood-buttons button {
+    width: 100%;
+  }
+
+  .music-list-container {
+    max-height: 240px;
+  }
+
+  .mood-chat-history {
+    height: 220px;
+  }
+
+  .mood-chat-input-row {
+    flex-direction: column;
+  }
+
+  .mood-chat-input {
+    width: 100%;
+    min-height: 80px;
+    height: auto;
+  }
+
+  .mood-chat-send {
+    width: 100%;
+  }
 }

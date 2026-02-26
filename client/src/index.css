@@ -1,23 +1,58 @@
-/* StreamSphere\client\src\index.css */
+/* StreamSphere/client/src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap');
 @import "tailwindcss";
 
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(135deg, #ffffff, #00ffcc, #00bcd4);
-  background-size: 300% 300%;
-  animation: bgFlow 15s ease infinite;
-  font-family: 'Poppins', sans-serif;
+:root {
+  --bg-main: #070b14;
+  --bg-soft: #0f172a;
+  --card: rgba(14, 22, 40, 0.72);
+  --card-border: rgba(148, 163, 184, 0.24);
+  --text-main: #e6ecff;
+  --text-muted: #9cb0d4;
+  --accent: #2dd4bf;
+  --accent-2: #22d3ee;
+  --danger: #ff6b6b;
 }
 
-@keyframes bgFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  width: 100%;
+  background:
+    radial-gradient(80% 70% at 10% 10%, rgba(45, 212, 191, 0.18), transparent 60%),
+    radial-gradient(70% 65% at 90% 15%, rgba(56, 189, 248, 0.18), transparent 60%),
+    radial-gradient(50% 45% at 50% 100%, rgba(129, 140, 248, 0.16), transparent 60%),
+    var(--bg-main);
+  color: var(--text-main);
+  font-family: 'Manrope', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Sora', sans-serif;
+  letter-spacing: -0.02em;
 }
 
 #root {
-   min-height: 100%;
+  min-height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
 }

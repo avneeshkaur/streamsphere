@@ -1,52 +1,48 @@
-/* StreamSphere\client\src\styles\moodai.css */
-
-/* copyright@streamsphere */
 .moodai-container {
   text-align: center;
-  padding: 2rem;
+  padding: 1.8rem;
   min-height: 100vh;
-  color: white;
-  font-family: 'Segoe UI', sans-serif;
-  transition: background 0.5s ease-in-out;
+  color: #f8fafc;
+  font-family: 'Manrope', sans-serif;
+  transition: background 0.35s ease;
   overflow-x: hidden;
   position: relative;
 }
 
 .mood-video {
-  width: 480px;
+  width: min(100%, 560px);
   height: auto;
-  border-radius: 12px;
+  border-radius: 16px;
   margin-top: 1rem;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  box-shadow: 0 18px 36px rgba(2, 6, 23, 0.36);
 }
 
 .moodai-container h1 {
-  font-size: 2.2rem;
-  margin-bottom: 1rem;
-  color: #00ffc8;
+  margin: 0;
+  font-size: clamp(1.6rem, 2.7vw, 2.35rem);
+  color: #99f6e4;
 }
 
 .detected {
-  color: #ffdf60;
-  font-weight: bold;
-  font-size: 1.2rem;
+  color: #fde68a;
+  font-weight: 700;
+  font-size: 1.08rem;
 }
 
 .quote {
   font-style: italic;
-  font-size: 1.1rem;
-  color: #eee;
-  margin: 0.8rem auto;
-  max-width: 90%;
-  animation: fadeIn 2s ease-in-out;
+  font-size: 1rem;
+  color: #dbeafe;
+  margin: 0.9rem auto;
+  max-width: 680px;
 }
 
 audio {
-  margin-top: 1rem;
-  width: 80%;
+  margin-top: 0.8rem;
+  width: min(100%, 560px);
 }
 
-/* Relaxed mood - Birds animation */
 .bird-container {
   position: fixed;
   top: 0;
@@ -55,41 +51,45 @@ audio {
   height: 100vh;
   pointer-events: none;
   z-index: 1000;
-  background-color: transparent;
 }
-.bird, .bird2, .bird3 {
+
+.bird,
+.bird2,
+.bird3 {
   position: absolute;
-  width: 80px;
-  height: 60px;
+  width: 72px;
+  height: 52px;
   background-repeat: no-repeat;
   background-size: contain;
   animation: fly 20s linear infinite, flutter 4s ease-in-out infinite;
-  border: none;
-  background-color: transparent;
-  filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.26));
 }
+
 .bird {
   top: 10%;
   animation-delay: 0s, 0s;
 }
+
 .bird2 {
   top: 30%;
   animation-delay: 7s, 2s;
 }
+
 .bird3 {
   top: 50%;
   animation-delay: 14s, 4s;
 }
+
 @keyframes fly {
   0% { transform: translateX(-150px); }
   100% { transform: translateX(110vw); }
 }
+
 @keyframes flutter {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-15px); }
 }
 
-/* Calm background video */
 .bg-video {
   position: fixed;
   top: 0;
@@ -98,52 +98,40 @@ audio {
   min-height: 100vh;
   object-fit: cover;
   z-index: -1;
-  opacity: 0.3;
+  opacity: 0.25;
 }
 
-/* Happy mood background image overlay */
 .happy-wallpaper {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   background-image: url('../assets/bg.jpg');
   background-size: cover;
   background-position: center;
   z-index: 0;
-  opacity: 1;
+  opacity: 0.85;
 }
 
-/* Mood Backgrounds */
 .happy-bg {
-  background: linear-gradient(to bottom, #ffe259, #ffa751);
+  background: linear-gradient(180deg, #fb7185 0%, #f97316 100%);
 }
+
 .sad-bg {
-  background: linear-gradient(to bottom, #485563, #29323c);
+  background: linear-gradient(180deg, #334155 0%, #0f172a 100%);
 }
+
 .angry-bg {
-  background: linear-gradient(to bottom, #cb2d3e, #ef473a);
+  background: linear-gradient(180deg, #7f1d1d 0%, #ef4444 100%);
 }
+
 .neutral-bg {
-  background: linear-gradient(to bottom, #2980b9, #6dd5fa);
-}
-.calm-bg, .relaxed-bg {
-  background: linear-gradient(to bottom, #56ccf2, #2f80ed);
+  background: linear-gradient(180deg, #1d4ed8 0%, #0f172a 100%);
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.calm-bg,
+.relaxed-bg {
+  background: linear-gradient(180deg, #155e75 0%, #1e293b 100%);
 }
 
-/* Angry Mood - Punch Game Styles */
 .punch-zone {
   display: flex;
   flex-direction: column;
@@ -151,24 +139,21 @@ audio {
   margin-top: 1rem;
 }
 
-/* Updated punchbag styles for big punchbag with floaty animation */
 .punchbag.big {
-  width: 200px;
+  width: 180px;
   height: auto;
-  margin: 30px auto;
+  margin: 22px auto;
   display: block;
   animation: floaty 3s ease-in-out infinite;
   cursor: pointer;
   transition: transform 0.2s;
 }
 
-/* Floaty animation keyframes */
 @keyframes floaty {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
 
-/* Shake animation for punchbag rotation */
 .punchbag.shake {
   animation: shake 0.3s ease-in-out;
 }
@@ -181,35 +166,21 @@ audio {
   100% { transform: rotate(0); }
 }
 
-/* Responsive styles for mobile devices */
 @media (max-width: 768px) {
   .moodai-container {
     padding: 1rem;
   }
 
-  .mood-video {
-    width: 100%;
-    height: auto;
-  }
-
   .moodai-container h1 {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
 
-  .detected {
-    font-size: 1rem;
-  }
-
+  .detected,
   .quote {
-    font-size: 1rem;
-    max-width: 100%;
-  }
-
-  audio {
-    width: 100%;
+    font-size: 0.95rem;
   }
 
   .punchbag.big {
-    width: 150px;
+    width: 148px;
   }
 }

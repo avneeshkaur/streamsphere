@@ -3,13 +3,14 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const sessionId = uuidv4();
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "https://streamsphere-backend.onrender.com";
 
 const DialogflowChat = () => {
   const [input, setInput] = useState("");
   const [response, setResponse] = useState("");
 
   const handleSend = async () => {
-    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chatbot`, {
+    const res = await fetch(`${API_BASE_URL}/api/chatbot`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: input, sessionId })

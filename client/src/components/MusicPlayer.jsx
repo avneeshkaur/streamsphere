@@ -1,4 +1,4 @@
-// StreamSphere\client\src\components\MusicPlayer.jsx
+// StreamSphere/client/src/components/MusicPlayer.jsx
 
 import React, { useEffect, useRef, useState } from "react";
 import WaveSurfer from "wavesurfer.js";
@@ -15,34 +15,23 @@ const MusicPlayer = ({ audio }) => {
 
     wavesurfer.current = WaveSurfer.create({
       container: waveformRef.current,
-      waveColor: "#ddd",
-      progressColor: "#4a90e2",
-      cursorColor: "#4a90e2",
+      waveColor: "#334155",
+      progressColor: "#22d3ee",
+      cursorColor: "#2dd4bf",
       barWidth: 2,
       barRadius: 3,
       responsive: true,
-      height: 80,
+      height: 56,
       normalize: true,
       partialRender: true,
     });
 
     wavesurfer.current.load(audio);
 
-    wavesurfer.current.on("ready", () => {
-      setIsPlaying(false);
-    });
-
-    wavesurfer.current.on("play", () => {
-      setIsPlaying(true);
-    });
-
-    wavesurfer.current.on("pause", () => {
-      setIsPlaying(false);
-    });
-
-    wavesurfer.current.on("finish", () => {
-      setIsPlaying(false);
-    });
+    wavesurfer.current.on("ready", () => setIsPlaying(false));
+    wavesurfer.current.on("play", () => setIsPlaying(true));
+    wavesurfer.current.on("pause", () => setIsPlaying(false));
+    wavesurfer.current.on("finish", () => setIsPlaying(false));
 
     return () => {
       if (wavesurfer.current) {
@@ -54,14 +43,13 @@ const MusicPlayer = ({ audio }) => {
   const handlePlayPause = () => {
     if (wavesurfer.current) {
       wavesurfer.current.playPause();
-      // Removed immediate toggle of isPlaying here
     }
   };
 
   return (
-    <div>
+    <div className="music-player">
       <div ref={waveformRef} />
-      <button onClick={handlePlayPause} style={{ marginTop: "10px" }}>
+      <button onClick={handlePlayPause} className="music-player-btn">
         {isPlaying ? "Pause" : "Play"}
       </button>
     </div>

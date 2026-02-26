@@ -1,7 +1,10 @@
-// StreamSphere\client\src\pages\MusicLibrary.jsx
+// StreamSphere/client/src/pages/MusicLibrary.jsx
 
 import React, { useState, useEffect } from "react";
 import MusicCard from "../components/MusicCard";
+import "../styles/musiclibrary.css";
+
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "https://streamsphere-backend.onrender.com";
 
 const MusicLibrary = () => {
   const [musicList, setMusicList] = useState([]);
@@ -25,7 +28,7 @@ const MusicLibrary = () => {
       setError(null);
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_BACKEND_URL}/api/music?term=${encodeURIComponent(searchTerm)}`,
+          `${API_BASE_URL}/api/music?term=${encodeURIComponent(searchTerm)}`,
           { signal }
         );
         if (!response.ok) {
@@ -45,7 +48,6 @@ const MusicLibrary = () => {
         setMusicList(songs);
       } catch (err) {
         if (err.name === "AbortError") {
-          // Fetch aborted, do nothing
           return;
         }
         setError(err.message);
@@ -63,27 +65,21 @@ const MusicLibrary = () => {
   }, [searchTerm]);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>🎵 Music Library</h2>
+    <div className="music-library-page">
+      <h2 className="music-library-title">Music Library</h2>
       <input
         type="text"
         placeholder="Search songs..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        style={{
-          padding: "8px",
-          width: "100%",
-          maxWidth: "400px",
-          marginBottom: "20px",
-          fontSize: "16px",
-        }}
+        className="music-library-search"
       />
-      {loading && <div>Loading music...</div>}
-      {error && <div style={{ color: "red" }}>Error: {error}</div>}
+      {loading && <div className="music-library-status">Loading music...</div>}
+      {error && <div className="music-library-status error">Error: {error}</div>}
       {!loading && !error && musicList.length === 0 && searchTerm && (
-        <div>No songs found for "{searchTerm}".</div>
+        <div className="music-library-status">No songs found for "{searchTerm}".</div>
       )}
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+      <div className="music-library-grid">
         {musicList.map((song) => (
           <MusicCard key={song.id} song={song} />
         ))}
