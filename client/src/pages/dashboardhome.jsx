@@ -2,13 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import "../styles/dashboardhome.css";
-import { Smile, Music, User, Settings, LogOut } from "lucide-react";
+import { Smile, Music, User, Settings, LogOut, Menu, X } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { motion } from "framer-motion";
 
 const DashboardHome = () => {
   const [user, setUser] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,7 +47,15 @@ const DashboardHome = () => {
         <motion.div className="logo" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
           🎧 StreamSphere
         </motion.div>
-        <ul className="nav-links">
+        <button
+          className="nav-toggle"
+          onClick={() => setMenuOpen((prev) => !prev)}
+          aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+        >
+          {menuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+        <ul className={`nav-links ${menuOpen ? "open" : ""}`}>
           <li><Link to="/" aria-label="Home">Home</Link></li>
           <li><Link to="/music-library" aria-label="Music Library">Music</Link></li>
           <li><Link to="/moodify" aria-label="Moodify">Moodify</Link></li>
