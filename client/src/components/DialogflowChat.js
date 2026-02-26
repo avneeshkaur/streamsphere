@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-const projectId = "lyrical-bus-458006"; // 🔁 Use your own Project ID
 const sessionId = uuidv4();
 
 const DialogflowChat = () => {
@@ -10,10 +9,10 @@ const DialogflowChat = () => {
   const [response, setResponse] = useState("");
 
   const handleSend = async () => {
-    const res = await fetch("http://localhost:5002/api/dialogflow", {
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chatbot`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text: input, sessionId }),
+      body: JSON.stringify({ message: input, sessionId })
     });
     const data = await res.json();
     setResponse(data.reply);

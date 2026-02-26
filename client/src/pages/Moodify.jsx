@@ -24,8 +24,6 @@ const Moodify = () => {
   const [mood, setMood] = useState("");
   const [musicList, setMusicList] = useState([]);
   const currentAudio = useRef(null);
-
-  // Chatbot state
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
 
@@ -51,7 +49,6 @@ const Moodify = () => {
     currentAudio.current = audio;
   };
 
-  // Chatbot function
   const sendMessage = async () => {
     if (!message.trim()) return;
 
@@ -69,13 +66,12 @@ const Moodify = () => {
       const botMsg = { type: "bot", text: data.reply || "No response" };
       setChat((prev) => [...prev, botMsg]);
     } catch (err) {
-      setChat((prev) => [...prev, { type: "bot", text: "⚠️ Error talking to AI" }]);
+      setChat((prev) => [...prev, { type: "bot", text: "Error talking to AI" }]);
     }
   };
 
-  // Added keyboard event handler for Enter key to send message
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       sendMessage();
     }
@@ -83,18 +79,12 @@ const Moodify = () => {
 
   return (
     <div className={`moodify-container ${mood.toLowerCase()}`}>
-      {/* Left Section */}
       <section className="moodify-left glass">
-        <h1>Mood Music 🎵</h1>
+        <h1>Mood Music</h1>
         <p>Select your current mood</p>
         <div className="mood-buttons">
           {["Happy", "Sad", "Angry", "Calm", "Romantic"].map((m) => (
             <button key={m} onClick={() => setMood(m)}>
-              {m === "Happy" && "😊 "}
-              {m === "Sad" && "😢 "}
-              {m === "Angry" && "😠 "}
-              {m === "Calm" && "😌 "}
-              {m === "Romantic" && "💖 "}
               {m}
             </button>
           ))}
@@ -102,22 +92,20 @@ const Moodify = () => {
 
         {mood && (
           <div className="mood-image">
-            <img src={moodImages[mood]} alt={mood} style={{ maxWidth: "200px", borderRadius: "15px" }} />
+            <img src={moodImages[mood]} alt={mood} className="mood-preview-image" />
           </div>
         )}
 
         {mood && musicList.length > 0 && (
           <div className="music-list-container">
-            <h3>Recommended for your mood 🎧</h3>
+            <h3>Recommended for your mood</h3>
             <ul className="music-list">
               {musicList.map((track) => (
                 <li key={track.trackId}>
-                  <p>{track.trackName} - {track.artistName}</p>
-                  <audio
-                    controls
-                    src={track.previewUrl}
-                    onPlay={(e) => handlePlay(e.target)}
-                  >
+                  <p>
+                    {track.trackName} - {track.artistName}
+                  </p>
+                  <audio controls src={track.previewUrl} onPlay={(e) => handlePlay(e.target)}>
                     Your browser does not support the audio element.
                   </audio>
                 </li>
@@ -127,57 +115,26 @@ const Moodify = () => {
         )}
       </section>
 
-      {/* Right Section - AI Chatbot */}
-      <section className="moodify-right glass" style={{ flexBasis: "25%", padding: "15px" }}>
-        <h2 style={{ fontSize: "1.2rem" }}>🧠 MoodAI Chat</h2>
-        <div style={{
-          height: "300px",
-          overflowY: "auto",
-          background: "#111",
-          padding: "10px",
-          borderRadius: "10px",
-          marginBottom: "10px",
-          color: "#fff"
-        }}>
+      <section className="moodify-right glass mood-chat-panel">
+        <h2 className="mood-chat-title">MoodAI Chat</h2>
+        <div className="mood-chat-history">
           {chat.map((msg, i) => (
-            <div key={i} style={{ textAlign: msg.type === "user" ? "right" : "left", margin: "5px 0" }}>
-              <span style={{
-                background: msg.type === "user" ? "#0051ff" : "#00ffcc",
-                padding: "8px 12px",
-                borderRadius: "10px",
-                display: "inline-block"
-              }}>
+            <div key={i} className={`mood-chat-row ${msg.type === "user" ? "user" : "bot"}`}>
+              <span className={`mood-chat-bubble ${msg.type === "user" ? "user" : "bot"}`}>
                 {msg.text}
               </span>
             </div>
           ))}
         </div>
-        <div style={{ display: "flex", gap: "10px" }}>
+        <div className="mood-chat-input-row">
           <textarea
             placeholder="Say something..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={handleKeyDown}
-            style={{
-              flex: 1,
-              padding: "10px",
-              borderRadius: "5px",
-              border: "none",
-              fontSize: "1rem",
-              resize: "none",
-              height: "40px"
-            }}
+            className="mood-chat-input"
           />
-          <button
-            onClick={sendMessage}
-            style={{
-              padding: "10px 15px",
-              background: "#00ffcc",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer"
-            }}
-          >
+          <button onClick={sendMessage} className="mood-chat-send">
             Send
           </button>
         </div>
